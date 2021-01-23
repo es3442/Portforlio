@@ -114,17 +114,18 @@ p {
     color: var(--color-white);
     padding: 16px;
     transition: all var(--animation--duration) ease-in-out;
+    z-index: 1;
 }
 #navbar.navbar--dark{
     background-color: var(--color-navbar);
-    padding: 8px;
-}
-.nabvar__menu{
-    display: flex;
+    padding: 4px;
 }
 .navbar__logo{
     font-size: var(--font-medium);
     font-weight: var(--weight-semi-bold);
+}
+.nabvar__menu{
+    display: flex;
 }
 .nabvar__menu__item{
     padding: 8px 12px;
