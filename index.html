@@ -21,18 +21,34 @@
                 xfbml: true,                     // Parse social plugins on this webpage.
                 version: 'v9.0'           // Use this Graph API version for this call.
             });
+
             //These three cases are handled in the callback function.
             var callback = function (response) {
                 console.log(response);
                 //statusChangeCallback(response);// Returns the login status.
+                if (response.status === 'connected') {
+                    document.querySelector("#authBtn").value = 'Logout';
+                }
+                else {
+                    document.querySelector("#authBtn").value = 'Login';
+                }
             }
             FB.getLoginStatus(callback);  // Called after the JS SDK has been initialized.
         };
+
+        //load the SDK asynchronously
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
     </script>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 </head>
 
 <body>
+    <button id="authBtn" value="checking..."></button>
     <!-- Navbar -->
     <nav id="navbar">
         <div class="navbar__logo">
