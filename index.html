@@ -13,6 +13,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="main.js" defer></script>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '448118962974345',
+                cookie: true,                     // Enable cookies to allow the server to access the session.
+                xfbml: true,                     // Parse social plugins on this webpage.
+                version: 'v9.0'           // Use this Graph API version for this call.
+            });
+            //These three cases are handled in the callback function.
+            var callback = function (response) {
+                console.log(response);
+                //statusChangeCallback(response);// Returns the login status.
+            }
+            FB.getLoginStatus(callback);  // Called after the JS SDK has been initialized.
+        };
+    </script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 </head>
 
 <body>
