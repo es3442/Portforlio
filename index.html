@@ -14,6 +14,22 @@
     <link rel="stylesheet" href="style.css">
     <script src="main.js" defer></script>
     <script>
+        //These three cases are handled in the callback function.
+        var checkLoginStatus = function (response) {
+            console.log(response);
+            //statusChangeCallback(response);// Returns the login status.
+            if (response.status === 'connected') {
+                document.querySelector("#authBtn").value = 'Logout';
+                /* make the API call */
+                FB.api("/me/", function (response) {
+                    document.querySelector('#name').innerHTML = 'Welcome' + response.name;
+                });
+            } else {
+                document.querySelector("#authBtn").value = 'Login';
+                document.querySelector('#name').innerHTML = '';
+            }
+        }
+
         window.fbAsyncInit = function () {
             FB.init({
                 appId: '448118962974345',
@@ -21,19 +37,7 @@
                 xfbml: true,                     // Parse social plugins on this webpage.
                 version: 'v9.0'           // Use this Graph API version for this call.
             });
-
-            //These three cases are handled in the callback function.
-            var callback = function (response) {
-                console.log(response);
-                //statusChangeCallback(response);// Returns the login status.
-                if (response.status === 'connected') {
-                    document.querySelector("#authBtn").value = 'Logout';
-                }
-                else {
-                    document.querySelector("#authBtn").value = 'Login';
-                }
-            }
-            FB.getLoginStatus(callback);  // Called after the JS SDK has been initialized.
+            FB.getLoginStatus(checkLoginStatus);  // Called after the JS SDK has been initialized.
         };
 
         //load the SDK asynchronously
@@ -54,15 +58,16 @@
         FB.login(function(response){
             // handle the response
             console.log('login =>', response); 
+            checkLoginStatus(response);
         });
     }else{
         //now login
         FB.logout(function(response) {
             // Person is now logged out
-            console.log('logout =>', response); 
+            console.log('logout =>', response);
+            checkLoginStatus(response);
         });
-    }
-    ">
+    }"><span id="name"></span>
     <!-- Navbar -->
     <nav id="navbar">
         <div class="navbar__logo">
