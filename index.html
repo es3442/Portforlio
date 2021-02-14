@@ -48,7 +48,21 @@
 </head>
 
 <body>
-    <input type="button" id="authBtn" value="checking....">
+    <input type="button" id="authBtn" value="checking...." onclick="
+    if(this.value=='Login'){
+        //now logout
+        FB.login(function(response){
+            // handle the response
+            console.log('login =>', response); 
+        });
+    }else{
+        //now login
+        FB.logout(function(response) {
+            // Person is now logged out
+            console.log('logout =>', response); 
+        });
+    }
+    ">
     <!-- Navbar -->
     <nav id="navbar">
         <div class="navbar__logo">
